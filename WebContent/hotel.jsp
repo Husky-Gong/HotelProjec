@@ -242,18 +242,7 @@
 				});
 			});
 		};
-	//==行监听事件=============================================	
-		table.on("tool(dataTableFilter)",function(d){
-			var event = d.event;
-			var data = d.data;
-			if(event == "reset"){
-				//重置密码
-				resetPwd(data);
-			}else if(event == "enable"){
-				//让用户数据生效
-				enable(data);
-			}
-		});	
+
 	});
 </script>
 </body>
