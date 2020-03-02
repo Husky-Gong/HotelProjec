@@ -61,9 +61,9 @@ public class ISearchImpl implements ISearch{
 		cuserDao.insert(userName,password,realName,type,isDel,createTime,modifyTime);
 		return new Result();
 	}
-
+	*/
 	@Override
-	public Result delete(String... ids) {
+	public Result delete(String id) {
 		//判断业务员是否关联客户,若关联客户则不让其修改
 		//根据业务员查询客户
 		List<CCustomer> customers = customerDao.selectCustomers(ids);
@@ -74,7 +74,7 @@ public class ISearchImpl implements ISearch{
 		cuserDao.updateState(Constant.USER_STATE_INVALID,ids);
 		return new Result();
 	}
-
+/*
 	@Override
 	public Result resetPwd(String id) {
 		String password = SecureUtil.md5(Constant.DEFAULT_PASSWORD);
