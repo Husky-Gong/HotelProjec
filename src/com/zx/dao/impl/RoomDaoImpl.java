@@ -17,4 +17,12 @@ public class RoomDaoImpl extends BaseDao implements IRoomDao{
 		
 		super.update(sql, type,price,info,hotelId);
 	}
+	
+	@Override
+	public void updateState(String id) {
+		StringBuffer sb = new StringBuffer("DELETE FROM room WHERE room.id=");
+		sb.append(id);
+		String sql = sb.toString();
+		super.update(sql);
+	}
 }

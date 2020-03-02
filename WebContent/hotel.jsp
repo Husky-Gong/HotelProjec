@@ -212,15 +212,15 @@
 			var event = d.event;
 			var data = d.data;
 			if(event == "del"){
-				del();
+				del(data);
 			}
 		});	
 		//--Delete-----------------------------
-		function del(){
+		function del(data){
 			//使用二次确认
 			layer.confirm("Confirm to delete",function(index){
 				//将需要重置的用户ID 传给后台
-				$.post("hotel.do?service=delete",{id:data.id},function(rs){
+				$.get("hotel.do?service=delete",{id:data.roomId},function(rs){
 					//校验业务码
 					if(rs.code != 200){
 						//显示异常信息
