@@ -254,46 +254,6 @@
 				enable(data);
 			}
 		});	
-		//--重置密码-----------------------------
-		function resetPwd(data){
-			//使用二次确认
-			layer.confirm("确定要重置密码吗?",function(index){
-				//将需要重置的用户ID 传给后台
-				$.post("user.do?service=reset",{id:data.id},function(rs){
-					//校验业务码
-					if(rs.code != 200){
-						//显示异常信息
-						layer.msg(rs.msg);
-						return false;
-					}
-					layer.msg("重置成功");
-					//关闭弹出层
-					layer.close(index);
-					//重载数据列表
-					$("#searchBtn").click();
-				});
-			});
-		}
-		//--使用户信息生效-----------------------------
-		function enable(data){
-			//使用二次确认
-			layer.confirm("确定启用该数据吗?",function(index){
-				//将需要重置的用户ID 传给后台
-				$.post("user.do?service=enable",{id:data.id},function(rs){
-					//校验业务码
-					if(rs.code != 200){
-						//显示异常信息
-						layer.msg(rs.msg);
-						return false;
-					}
-					layer.msg("启用成功");
-					//关闭弹出层
-					layer.close(index);
-					//重载数据列表
-					$("#searchBtn").click();
-				});
-			});
-		}
 	});
 </script>
 </body>
