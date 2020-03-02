@@ -114,7 +114,7 @@ public class SearchController extends HttpServlet {
 
 	
 	protected void delete(HttpServletRequest req, HttpServletResponse resp) {
-		String ids = req.getParameterValues("id");
+		String ids = req.getParameter("id");
 		Result rs = searchService.delete(ids);
 		UserCache.remove(ids);
 		//将业务结果进行输出
