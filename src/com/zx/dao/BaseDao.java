@@ -126,6 +126,7 @@ public class BaseDao {
 					Object object = rs.getObject(columnLabel);
 					//为对象赋值  为对象的属性赋值  
 					//1.根据列的别名找到类中的属性
+					if(columnLabel.equals("roomid")) columnLabel = "roomId";
 					Field field = cls.getDeclaredField(columnLabel);
 					//2.为该属性赋值
 					field.setAccessible(true);
@@ -229,6 +230,7 @@ public class BaseDao {
 	 */
 	public  <T> PageInfo<T> selectPage(String sql,Class<T> cls,Integer pageNo,Integer pageSize){
 		//获取符合条件的总数据条数
+		System.out.println(sql);
 		int count = selectCount(sql);
 		// 计算最大页码 总页数 若此时 total 的值为 0 则 totalPage值为0
 		int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
@@ -271,6 +273,7 @@ public class BaseDao {
 		sb.append(sql);
 		sb.append(") rs");
 		sql = sb.toString();
+		System.out.println(sql);
 		PreparedStatement prep = null;
 		Connection conn = JdbcUtil.getConn();
 		ResultSet rs = null;

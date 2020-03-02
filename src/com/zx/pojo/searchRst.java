@@ -1,6 +1,7 @@
 package com.zx.pojo;
 
 public class searchRst {
+	private int roomId;
 	private int id;
 	private String name;
 	private int type;
@@ -10,8 +11,11 @@ public class searchRst {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public int getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
 	}
 	public String getName() {
 		return name;
@@ -43,13 +47,17 @@ public class searchRst {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "searchRst [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", address=" + address
-				+ ", mobile=" + mobile + "]";
+		return "searchRst [roomId=" + roomId + ", id=" + id + ", name=" + name + ", type=" + type + ", price=" + price
+				+ ", address=" + address + ", mobile=" + mobile + "]";
 	}
-	public searchRst(int id, String name, int type, double price, String address, String mobile) {
+	public searchRst(int roomId, int id, String name, int type, double price, String address, String mobile) {
 		super();
+		this.roomId = roomId;
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -60,6 +68,7 @@ public class searchRst {
 	public searchRst() {
 		super();
 	}
+	
 	
 	
 }

@@ -51,6 +51,7 @@ public class SearchController extends HttpServlet {
 	 * @return: void
 	 */
 	protected void list(HttpServletRequest req, HttpServletResponse resp) {
+		String roomId = req.getParameter("roomId");
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String type = req.getParameter("type");
@@ -62,6 +63,9 @@ public class SearchController extends HttpServlet {
 		String limit = req.getParameter("limit");
 		
 		Map<String,Object> param = new HashMap<>();
+		if(StrUtil.isNotBlank(roomId)) {
+			param.put("roomId", roomId);
+		}
 		if(StrUtil.isNotBlank(id)) {
 			param.put("id", id);
 		}
@@ -108,18 +112,18 @@ public class SearchController extends HttpServlet {
 		RespWrite.writerJson(resp, rs);
 	}
 
-	/*
+	
 	protected void delete(HttpServletRequest req, HttpServletResponse resp) {
-		String[] ids = req.getParameterValues("id");
-		Result rs = userService.delete(ids);
+		String ids = req.getParameterValues("id");
+		Result rs = searchService.delete(ids);
 		UserCache.remove(ids);
 		//将业务结果进行输出
-		RespWriter.writerJson(resp, rs);
+		RespWrite.writerJson(resp, rs);
 	}
 	
 	
 	
-
+	/*
 	protected void reset(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String id = req.getParameter("id");
 		Result rs = userService.resetPwd(id);

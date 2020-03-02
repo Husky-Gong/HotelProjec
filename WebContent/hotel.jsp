@@ -128,6 +128,7 @@
 			// table fields
 			cols:[[
 				{type:'checkbox'},
+				{field:'roomId',title:'roomId',hide:true},
 				{field:'id',title:'Hotel ID',width:'85'},
 				
 				{field:'name',title:'Hotel Name',width:'110'},
@@ -166,8 +167,6 @@
 			if(event == "add"){
 				//调用具体的添加方法
 				add();
-			}else if(event == "del"){
-				del();
 			}
 		});
 		//-----具体添加方法------------
@@ -208,41 +207,34 @@
 				}
 			});
 		}
-		//----删除--------------------
-		function del(){
-			//获取被选中的数据
-			var checkStatus = table.checkStatus("dataTableId");
-			var data = checkStatus.data;
-			//如果没有数据被选中 则提示要先选中数据
-			if(data == null || data.length == 0){
-				layer.alert("请先选中需要删除的数据",{icon:7});
-				return false;
+		//==行监听事件=============================================	
+		table.on("tool(dataTableFilter)",function(d){
+			var event = d.event;
+			var data = d.data;
+			if(event == "del"){
+				del();
 			}
-			//删除的二次确认
-			layer.confirm("你确定要删除吗?",{icon:5},function(index){
-				//将需要删除的数据的ID 传给后  将这些数据的有效状态修改为无效
-				//一种使用普通的表单格式   一种还可以使用json 数据进行传输
-				var param = "";
-				//此时 循环执行完 则param 就是 id的参数拼接的字符串
-				$.each(data,function(index,value){
-					var id = value.id;
-					param = param +"id="+id+"&";
-				});
-				$.get("hotel.do?service=delete",param,function(rs){
+		});	
+		//--Delete-----------------------------
+		function del(){
+			//使用二次确认
+			layer.confirm("Confirm to delete",function(index){
+				//将需要重置的用户ID 传给后台
+				$.post("hotel.do?service=delete",{id:data.id},function(rs){
 					//校验业务码
 					if(rs.code != 200){
 						//显示异常信息
 						layer.msg(rs.msg);
 						return false;
 					}
+					layer.msg("重置成功");
 					//关闭弹出层
 					layer.close(index);
 					//重载数据列表
 					$("#searchBtn").click();
 				});
 			});
-		};
-
+		}
 	});
 </script>
 </body>
